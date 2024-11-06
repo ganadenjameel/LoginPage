@@ -5,6 +5,7 @@
     box-sizing: border-box;
 }
 
+/* Page background */
 body {
     display: flex;
     justify-content: center;
@@ -15,15 +16,17 @@ body {
     font-size: 18px; /* Larger base font size */
 }
 
+/* Login container */
 .login-container {
     background-color: #d3d3d3;
     padding: 25px 50px; /* Increased padding */
-    border-radius: 12px;
+    border-radius: 12px; /* Larger border radius */
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
-    width: 320px; /* Increased width */
+    width: 320px; /* Larger width */
 }
 
+/* Title */
 .login-container h1 {
     font-size: 1.8rem;
     font-weight: bold;
@@ -31,16 +34,26 @@ body {
     color: #333;
 }
 
+/* Input fields */
 .login-container input[type="email"],
 .login-container input[type="password"] {
     width: 100%;
-    padding: 12px;
+    padding: 12px; /* Increased padding */
     margin: 12px 0 6px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    font-size: 1rem;
+    font-size: 1rem; /* Larger font */
 }
 
+/* Error messages */
+.error {
+    color: red;
+    font-size: 12px;
+    display: block;
+    margin-top: 8px;
+}
+
+/* Checkbox and label */
 .login-container .checkbox-container {
     display: flex;
     align-items: center;
@@ -54,6 +67,7 @@ body {
     margin-right: 12px;
 }
 
+/* Login button */
 .login-container button {
     width: 100%;
     padding: 12px;
@@ -66,10 +80,17 @@ body {
     margin-top: 20px;
 }
 
+/* Positioning the robot error message below the button */
+.login-container #robot-error {
+    margin-top: 10px; /* Ensures the error message appears below the checkbox */
+}
+
+/* Login button hover */
 .login-container button:hover {
     background-color: #555;
 }
 
+/* Footer text */
 .login-container p {
     margin-top: 15px;
     font-size: 14px;

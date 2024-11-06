@@ -65,7 +65,7 @@ body {
 /* Error messages */
 .error {
     color: red;
-    font-size: 0.9rem;
+    font-size: 12px;
     display: block;
     margin-top: 8px;
 }
