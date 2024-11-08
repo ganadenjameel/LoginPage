@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Ensure Link is imported
-import './SignUp.css'; // Make sure the CSS is imported
+import { Link } from 'react-router-dom';
+import './SignUp.css';
 
 const SignUp: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -8,7 +8,7 @@ const SignUp: React.FC = () => {
     username: '',
     password: '',
     confirmPassword: '',
-    isRobotChecked: false,  // Initial value for checkbox state
+    isRobotChecked: false,
   });
 
   const [errors, setErrors] = useState({
@@ -22,25 +22,15 @@ const SignUp: React.FC = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Handle input change
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value, type, checked } = e.target;
 
-    if (type === 'checkbox') {
-      // Handle checkbox change separately
-      setFormData((prevData) => ({
-        ...prevData,
-        [id]: checked, // Update checkbox state based on checked value
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [id]: value, // Handle other input types
-      }));
-    }
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: type === 'checkbox' ? checked : value,
+    }));
   };
 
-  // Validate the form
   const validateForm = () => {
     let isValid = true;
     let validationErrors = {
@@ -52,37 +42,31 @@ const SignUp: React.FC = () => {
       form: '',
     };
 
-    // Email validation
     if (!formData.email.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) {
       validationErrors.email = 'Please enter a valid email address.';
       isValid = false;
     }
 
-    // Username validation
     if (formData.username.length <= 4) {
       validationErrors.username = 'Username must be more than 4 characters.';
       isValid = false;
     }
 
-    // Password validation
     if (formData.password.length <= 5 || !/\d/.test(formData.password)) {
       validationErrors.password = 'Password must be at least 6 characters and contain a number.';
       isValid = false;
     }
 
-    // Confirm password validation
     if (formData.confirmPassword !== formData.password) {
       validationErrors.confirmPassword = 'Passwords do not match.';
       isValid = false;
     }
 
-    // Checkbox validation
     if (!formData.isRobotChecked) {
       validationErrors.robot = 'Please confirm you are not a robot.';
       isValid = false;
     }
 
-    // If any validation failed
     if (!isValid) {
       validationErrors.form = '*Please check the fields above';
     } else {
@@ -93,20 +77,19 @@ const SignUp: React.FC = () => {
     return isValid;
   };
 
-  // Open the success modal
   const openModal = () => {
     setIsModalOpen(true);
   };
 
-  // Close the success modal
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
-  // Handle form submission
   const handleSubmit = () => {
     if (validateForm()) {
-      // Simulate successful registration and show modal
+      console.log("Form is valid, opening modal");
+    } else {
+      console.log("Form is invalid");
     }
   };
 
@@ -157,7 +140,7 @@ const SignUp: React.FC = () => {
         <input
           type="checkbox"
           id="isRobotChecked"
-          checked={formData.isRobotChecked}  // Properly link checkbox value
+          checked={formData.isRobotChecked}
           onChange={handleInputChange}
         />
         <label htmlFor="isRobotChecked">I’m not a robot</label>
@@ -170,13 +153,17 @@ const SignUp: React.FC = () => {
 
       {errors.form && <span className="error">{errors.form}</span>}
 
-      {/* Success Modal */}
       {isModalOpen && (
-        <div className="modal">
-          <h2>Account successfully created!</h2>
-          <button onClick={() => window.location.href = '/'}>Return to Login</button>
-        </div>
-      )}
+  <div className="modal">
+    <div className="modal-content">
+      <h2>Account successfully created!</h2>
+      <button onClick={() => window.location.href = '/login'}>
+        Return to Login
+      </button>
+    </div>
+  </div>
+)}
+
     </div>
   );
 };
